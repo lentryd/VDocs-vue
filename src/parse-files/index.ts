@@ -33,7 +33,6 @@ function parseDir(rootDir: string, outDir: string) {
 
   files.forEach(({ name, rootPath, outPath }) => {
     const stat = statSync(rootPath);
-    const isMD = extname(rootPath) === ".md";
 
     if (isIgnoredFile(name)) {
       if (rootDir != outDir) return;
@@ -45,26 +44,20 @@ function parseDir(rootDir: string, outDir: string) {
     }
 
     if (stat.isDirectory()) return parseDir(rootPath, outPath);
-    else if (!isMD) writeCodeFile(rootPath, outPath);
-    else writeMarkdownFile(rootPath, outPath);
+    else parseFile(name, rootPath, outPath);
 
     if (rootDir == outDir) unlinkSync(rootPath);
   });
 }
 
-function saveFile(path: string, source: string) {
-  path = replaceExt(path, ".vue");
-  writeFileSync(path, source);
-}
+function parseFile(name: string, rootPath: string, outPath: string) {
+  const isMD = extname(rootPath) === ".md";
 
-function writeCodeFile(rootPath: string, outPath: string) {
-  const source = format(CODE_TEMPLATE, [justCode(rootPath)]);
-  saveFile(outPath, source);
-}
+  let source = (isMD ? markdown : justCode)(rootPath);
+  source = format(isMD ? MD_TEMPLATE : CODE_TEMPLATE, [source, name]);
 
-function writeMarkdownFile(rootPath: string, outPath: string) {
-  const source = format(MD_TEMPLATE, [markdown(rootPath)]);
-  saveFile(outPath, source);
+  outPath = replaceExt(outPath, ".vue");
+  writeFileSync(outPath, source);
 }
 
 export default function (rootDir: string, outDir: string) {
