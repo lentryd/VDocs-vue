@@ -1,89 +1,89 @@
-# Why is this necessary?
+# Зачем это нужно?
 
-## Theory
+## Теоретически
 
-This module allows you to convert any files into vue components. In order to make these files pleasant to view in the browser.
+Этот модуль преобразует файлы вашего репозитория GitHub в компоненты vue. Чтобы вы могли использовать их в своих vue проектах.
 
-## Practice
+## Практически
 
-I made this module for my [VDocs](https://lentryd.su/VDocs/) project. I just didn't want to clutter up the main project with this function and I made a separate module.
+Я сделал этот модуль для своего проекта [VDocs](https://lentryd.su/VDocs/). А так как в этом модуле много дополнительных функций, я не хотел засовывать их в один проект.
 
-# How does it work?
+# Как это работает
 
-## Module
+## Модуль
 
-### Installation
+### Установка
 
 ```bash
 npm i vdocs-vue -s
 ```
 
-### Usage
+### Использование
 
-#### Download the repository and convert the files.
+#### Скачать файлы репозитория и изменить их
 
-> It is not necessary to install git, but it is recommended.
-
-```typescript
-import file2vue from "vdocs-vue";
-
-const options = {
-  owner: "lentryd", // Your github username
-  repository: "VDocs-vue", // Repository name
-  folder: "./pages", // The path of the folder where you want to save the file. (You can not specify it)
-  branch: "main", // The branch of the repository. (You can not specify it)
-};
-
-file2vue(options); // An array with the data of the modified files.
-```
-
-#### Edit files that have already been downloaded.
+> Устанавливать git не обязательно, но рекомендуется.
 
 ```typescript
 import file2vue from "vdocs-vue";
 
 const options = {
-  folder: "./pages", // The path to the folder with the downloaded files.
+  owner: "lentryd", // GitHub username автора
+  repository: "VDocs-vue", // Название репозитория
+  folder: "./pages", // Путь к папке, в которой будут сохранены изменения (необязательно)
+  branch: "main", // Ветвь репозитория (необязательно)
 };
 
-file2vue(options); // An array with the data of the modified files.
+file2vue(options);
 ```
 
-## Bash script
+#### Изменить файлы, которые уже были скачены
 
-### Installation
+```typescript
+import file2vue from "vdocs-vue";
+
+const options = {
+  folder: "./pages", // Путь к папке с загруженными файлами
+};
+
+file2vue(options);
+```
+
+## Терминал
+
+### Установка
 
 ```bash
 npm i vdocs-vue -g
 ```
 
-### Check
+### Проверка установки
 
 ```bash
 vdocs-vue -h
 ```
 
-### Usage
+### Использование
 
-#### Download the repository and convert the files.
+#### Скачать файлы репозитория и изменить их
 
-> It is not necessary to install git, but it is recommended.
+> Устанавливать git не обязательно, но рекомендуется.
 
 ```bash
 vdocs-vue -o lentryd -r VDocs-vue -f ./pages -b main
 ```
 
-> The `-f` and `-b` parameters can be omitted.
+> Параметры `-f` и `-b` могут быть опущены.
 
-#### Edit files that have already been downloaded.
+#### Изменить файлы, которые уже были скачены
 
-If another directory is open.
+Если файлы находятся в другой папке.
 
 ```bash
 vdocs-vue -f ./pages
 ```
 
-If the directory with the files for changes is open.
+Если файлы находятся в текущей папке.
 
 ```bash
 vdocs-vue
