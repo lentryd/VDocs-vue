@@ -9,20 +9,15 @@ import parseDir from "./parse-files";
 
 const runningAsScript = require.main === module;
 
-export let MD_TEMPLATE = "<template><div>{0}</div></template>";
-export let CODE_TEMPLATE = "<template><div>{0}</div></template>";
-export let OUT_DIR = join(cwd(), "./your-vue-repository");
+export let MD_TEMPLATE =
+  "<template><div>{0}</div></template><script>export default { name: {1} }</script>";
+export let CODE_TEMPLATE =
+  "<template><div>{0}</div></template><script>export default { name: {1} }</script>";
+
+export const IsScript = require.main === module;
+export const OUT_DIR = join(cwd(), "./your-vue-repository");
 export const ROOT_DIR = join(__dirname, "../original-repository");
 export const IGNORE_FILES = [/^\.git/, /^\.npm/, /^package(.*)\.json/];
-
-/**
- * Setting the directory with the output files
- * @param path Relative or absolute path
- */
-export function setOutDir(path: string) {
-  if (isAbsolute(path)) OUT_DIR = path;
-  else OUT_DIR = join(cwd(), path);
-}
 
 /**
  * Setting a template for files
