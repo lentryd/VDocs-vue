@@ -1,9 +1,11 @@
 import { MD_TEMPLATE, CODE_TEMPLATE, IGNORE_FILES } from "../index";
 import { join, extname } from "path";
+import isImage from "is-image";
 import {
   statSync,
   mkdirSync,
   rmSync,
+  renameSync,
   unlinkSync,
   existsSync,
   readdirSync,
@@ -51,6 +53,11 @@ function parseDir(rootDir: string, outDir: string) {
 }
 
 function parseFile(name: string, rootPath: string, outPath: string) {
+  if (isImage(rootPath)) {
+    renameSync(rootPath, outPath);
+    return;
+  }
+
   const isMD = extname(rootPath) === ".md";
 
   let source = (isMD ? markdown : justCode)(rootPath);
