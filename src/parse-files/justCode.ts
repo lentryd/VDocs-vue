@@ -17,7 +17,7 @@ const CONTAINER_NAME = "blob-wrapper",
   BREAK_LINE_REGEXP = /\r\n|\r|\n/g;
 
 function lineNumbersValue(code: string, lang: string) {
-  const language = highlight.getLanguage(lang)?.name ?? "plaintext";
+  const language = !!highlight.getLanguage(lang) ? lang : "plaintext";
   const html = highlight.highlight(code, { language }).value;
 
   var element = parse("code");
