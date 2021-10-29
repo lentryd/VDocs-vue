@@ -10,9 +10,9 @@ import parseDir from "./parse-files";
 const runningAsScript = require.main === module;
 
 export let MD_TEMPLATE =
-  "<template><div>{0}</div></template><script>export default { name: {1} }</script>";
+  "<template><div>{0}</div></template><script>export default { name: '{1}' }</script>";
 export let CODE_TEMPLATE =
-  "<template><div>{0}</div></template><script>export default { name: {1} }</script>";
+  "<template><div>{0}</div></template><script>export default { name: '{1}' }</script>";
 
 export const IsScript = require.main === module;
 export const OUT_DIR = join(cwd(), "./your-vue-repository");
