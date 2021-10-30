@@ -56,7 +56,7 @@ function addLineNumbersBlockFor(inputHtml: string) {
           DATA_ATTR_NAME,
           CODE_BLOCK_NAME,
           i + 1,
-          lines[i].length > 0 ? lines[i] : " ",
+          lines[i].length > 0 ? parse(lines[i]).innerHTML : " ",
         ]
       );
     }
