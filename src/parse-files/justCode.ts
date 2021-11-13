@@ -63,7 +63,7 @@ function addLineNumbersBlockFor(inputHtml: string) {
 
     return format('<div class="{0}"><table>{1}</table></div>', [
       CONTAINER_NAME,
-      html,
+      escapingQuotes(html),
     ]);
   }
 
@@ -108,6 +108,10 @@ function getLines(text: string) {
 
 function getLinesCount(text: string) {
   return (text.trim().match(BREAK_LINE_REGEXP) || []).length;
+}
+
+function escapingQuotes(text: string) {
+  return text.replace(/`/g, "\\`").replace(/\$/g, "\\$");
 }
 
 export function format(format: string, args: any[]) {

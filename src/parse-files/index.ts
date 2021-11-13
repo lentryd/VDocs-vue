@@ -29,7 +29,7 @@ function parseDir(rootDir: string, outDir: string) {
 
   const files = readdirSync(rootDir).map((file) => ({
     rootPath: join(rootDir, file),
-    outPath: join(outDir, file),
+    outPath: join(outDir, file.replace(/^\./, "$1")),
     name: file,
   }));
 

@@ -12,12 +12,13 @@ const runningAsScript = require.main === module;
 export let MD_TEMPLATE =
   "<template><div>{0}</div></template><script>export default { name: '{1}' }</script>";
 export let CODE_TEMPLATE =
-  "<template><div>{0}</div></template><script>export default { name: '{1}' }</script>";
+  "<template><div v-html='html' /></template> <script> export default { name: '{1}', data: () => ({ html: `{0}`, }) };</script>";
+export let LINK_PARSER: LinkParser | undefined = undefined;
 
 export const IsScript = require.main === module;
 export const OUT_DIR = join(cwd(), "./your-vue-repository");
 export const ROOT_DIR = join(__dirname, "../original-repository");
-export const IGNORE_FILES = [/^\.git/, /^\.npm/, /^package(.*)\.json/];
+export const IGNORE_FILES = [/^\.git$/];
 
 /**
  * Setting a template for files
@@ -31,6 +32,16 @@ export function setCodeTemplate(template: string) {
  */
 export function setMarkdownTemplate(template: string) {
   MD_TEMPLATE = template;
+}
+
+type LinkParser = (
+  href: string | null,
+  title: string | null,
+  text: string
+) => string;
+
+export function setLinkParser(func: LinkParser) {
+  LINK_PARSER = func;
 }
 
 export interface VDocsOptions {
