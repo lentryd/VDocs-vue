@@ -1,4 +1,4 @@
-import marked, { RendererObject } from "marked";
+import { marked } from "marked";
 import highlight from "highlight.js";
 import { readFileSync } from "fs";
 import { LINK_PARSER } from "../index.js";

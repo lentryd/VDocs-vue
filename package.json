@@ -12,16 +12,16 @@
   "author": "lentryd",
   "license": "MIT",
   "dependencies": {
-    "highlight.js": "^11.2.0",
+    "highlight.js": "^11.5.0",
     "is-image": "^3.0.0",
-    "marked": "^3.0.3",
+    "marked": "^4.0.12",
     "minimist": "^1.2.5",
     "node-fetch": "^2.6.2",
     "node-html-parser": "^4.1.4",
     "replace-ext": "^2.0.0"
   },
   "devDependencies": {
-    "@types/marked": "^3.0.0",
+    "@types/marked": "^4.0.3",
     "@types/minimist": "^1.2.2",
     "@types/node": "^16.9.1",
     "@types/node-fetch": "^2.5.3",
