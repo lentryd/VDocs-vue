@@ -115,9 +115,12 @@ function escapingQuotes(text: string) {
 }
 
 export function format(format: string, args: any[]) {
-  return format.replace(/\{(\d+)\}/g, function (m, n) {
-    return args[n] !== undefined ? args[n] : m;
-  });
+  return format
+    .replace(/\{(\d+)\}/g, function (m, n) {
+      return args[n] !== undefined ? args[n] : m;
+    })
+    .replace(/\{/g, "&#123;")
+    .replace(/\}/g, "&#125;");
 }
 
 export default function (path: string) {
