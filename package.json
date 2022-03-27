@@ -1,6 +1,6 @@
 {
   "name": "vdocs-vue",
-  "version": "1.1.5",
+  "version": "1.1.6",
   "description": "This module converts github repository files to vue files.",
   "main": "dist/index.js",
   "bin": "dist/index.js",
