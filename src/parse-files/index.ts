@@ -60,7 +60,9 @@ function parseFile(name: string, rootPath: string, outPath: string) {
 
   const isMD = extname(rootPath) === ".md";
 
-  let source = (isMD ? markdown : justCode)(rootPath);
+  let source = (isMD ? markdown : justCode)(rootPath)
+    .replace(/\{/g, "&#123;")
+    .replace(/\}/g, "&#125;");
   source = format(isMD ? MD_TEMPLATE : CODE_TEMPLATE, [source, name]);
 
   outPath = replaceExt(outPath, ".vue");
