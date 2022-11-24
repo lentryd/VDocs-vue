@@ -1,12 +1,13 @@
 import { marked } from "marked";
 import highlight from "highlight.js";
 import { readFileSync } from "fs";
-import { LINK_PARSER } from "../index.js";
+import { LINK_PARSER, IMAGE_PARSER } from "../index.js";
 
 export default function (path: string) {
   marked.use({
     renderer: {
       ...(LINK_PARSER ? { link: LINK_PARSER } : {}),
+      image: IMAGE_PARSER,
       heading(text, level) {
         const id = text
           .toLowerCase()

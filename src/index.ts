@@ -14,6 +14,9 @@ export let MD_TEMPLATE =
 export let CODE_TEMPLATE =
   "<template><div v-html='html' /></template> <script> export default { name: '{1}', data: () => ({ html: `{0}`, }) };</script>";
 export let LINK_PARSER: LinkParser | undefined = undefined;
+export let IMAGE_PARSER: ImageParser = (href, _, text) => {
+  return `<img :src="require('${href}')" alt="${text}" />`;
+};
 
 export const IsScript = require.main === module;
 export const OUT_DIR = join(cwd(), "./your-vue-repository");
@@ -42,6 +45,16 @@ type LinkParser = (
 
 export function setLinkParser(func: LinkParser) {
   LINK_PARSER = func;
+}
+
+type ImageParser = (
+  href: string | null,
+  title: string | null,
+  text: string
+) => string;
+
+export function setImageParser(func: ImageParser) {
+  IMAGE_PARSER = func;
 }
 
 export interface VDocsOptions {
